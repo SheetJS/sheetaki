@@ -13,9 +13,18 @@ function do_url(req, url, res) {
 		}
 		var wb = XLSX.read(body, {type:'buffer'});
 		var N = url.query.N ? parseInt(url.query.N,10) : 0;
-		if(N < 0) return micro.send(res, 200, wb.SheetNames.join("\n"));
+		if(N < 0) {
+			switch(url.query.t || "csv") {
+				case "json": return micro.send(res, 200, JSON.stringify(wb.SheetNames.join("\n")));
+				default: return micro.send(res, 200, wb.SheetNames.join("\n"));
+			}
+		}
 		if(N >= wb.SheetNames.length) return micro.send(res, 500, "Cannot find sheet " + N);
-		XLSX.stream.to_csv(wb.Sheets[wb.SheetNames[N]]).pipe(res);
+		var ws = wb.Sheets[wb.SheetNames[N]];
+		switch(url.query.t) {
+			case "json": return micro.send(res, 200, JSON.stringify(XLSX.utils.sheet_to_json(ws, {header:1, raw:true})));
+			default: XLSX.stream.to_csv(ws).pipe(res);
+		}
 	});
 }
 
@@ -25,11 +34,15 @@ var msg = [
 	'parameters:',
 	'- url=<url>      the url to request',
 	'- N=<idx>        the sheet index to use (-1 for sheet list)',
+	'- t=<type>       export type: "json" for json',
 	'',
 	'examples: ',
-	'- /data/?url=https://obamawhitehouse.archives.gov/sites/default/files/omb/budget/fy2014/assets/receipts.xls',
+	'- /data?url=https://obamawhitehouse.archives.gov/sites/default/files/omb/budget/fy2014/assets/receipts.xls',
+	'',
+	'js-xlsx version: ' + XLSX.version
 ].join("\n");
 module.exports = function(req, res) {
+	res.setHeader('Access-Control-Allow-Origin', '*');
 	var url = URL.parse(req.url, true);
 	if(url.pathname == "/") return msg;
 	var mode = -1;
