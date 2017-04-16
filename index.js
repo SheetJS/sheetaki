@@ -1,6 +1,7 @@
 var XLSX = require('xlsx');
 var URL = require('url');
 var request = require('request');
+var send = require('send');
 var micro = require('micro');
 
 function do_url(req, url, res) {
@@ -23,28 +24,19 @@ function do_url(req, url, res) {
 		var ws = wb.Sheets[wb.SheetNames[N]];
 		switch(url.query.t) {
 			case "json": return micro.send(res, 200, JSON.stringify(XLSX.utils.sheet_to_json(ws, {header:1, raw:true})));
+			case "html": return XLSX.stream.to_html(ws).pipe(res);
 			default: XLSX.stream.to_csv(ws).pipe(res);
 		}
 	});
 }
-
-var msg = [
-	'request /data?url=<url>&N=<idx> to convert the data at [URL] to CSV',
-	'',
-	'parameters:',
-	'- url=<url>      the url to request',
-	'- N=<idx>        the sheet index to use (-1 for sheet list)',
-	'- t=<type>       export type: "json" for json',
-	'',
-	'examples: ',
-	'- /data?url=https://obamawhitehouse.archives.gov/sites/default/files/omb/budget/fy2014/assets/receipts.xls',
-	'',
-	'js-xlsx version: ' + XLSX.version
-].join("\n");
+send.mime.default_type="text/html";
 module.exports = function(req, res) {
-	res.setHeader('Access-Control-Allow-Origin', '*');
 	var url = URL.parse(req.url, true);
-	if(url.pathname == "/") return msg;
+	if(url.pathname == "/") {
+		res.setHeader('Content-Type', 'text/html; charset=UTF-8');
+		return send(req, "index.html").pipe(res);
+	}
+	res.setHeader('Access-Control-Allow-Origin', '*');
 	var mode = -1;
 	if(url.query.url) mode = 0;
 	if(mode == -1) return micro.send(res, 500, "Must issue command");

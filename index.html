@@ -1,0 +1,68 @@
+<html>
+<head>
+<title>SheetJS Spreadsheet Conversion Service</title>
+<link rel="icon" type="image/png" href="//rawgit.com/SheetJS/SheetJS.github.io/master/assets/img/logo.png"/>
+</head>
+<body>
+<style> a { text-decoration: none } </style>
+<pre>
+<b><a href="http://sheetjs.com">SheetJS</a> Spreadsheet Conversion Service</b>
+
+send a request to /data?url=&lt;url&gt;&amp;N=&lt;idx&gt; to convert the spreadsheet at `url` to a simpler format
+
+<b>parameters:</b>
+- url=&lt;url&gt;      the url to request
+- N=&lt;idx&gt;        the sheet index to use (-1 returns a list of sheet names in the workbook)
+- t=&lt;type&gt;       export type: "json" for json, "html" for html, default is CSV
+
+<b>examples:</b>
+</pre>
+<pre id="examples"></pre>
+<script>
+var URLS = [
+	["[CSV] ", {url:"https://obamawhitehouse.archives.gov/sites/default/files/omb/budget/fy2014/assets/receipts.xls"}],
+	["[JSON]", {url:"https://obamawhitehouse.archives.gov/sites/default/files/omb/budget/fy2014/assets/receipts.xls", t:"json"}],
+	["[HTML]", {url:"https://obamawhitehouse.archives.gov/sites/default/files/omb/budget/fy2014/assets/receipts.xls", t:"html"}],
+	[],
+	["[LIST]", {url:"https://www.ers.usda.gov/webdocs/DataFiles/Feed_Grains_Yearbook_Tables__18027/Feed%20Grains%20Yearbook%20Tables-All%20Years.xls?v=42780",N:-1}],
+	["[N=1] ", {url:"https://www.ers.usda.gov/webdocs/DataFiles/Feed_Grains_Yearbook_Tables__18027/Feed%20Grains%20Yearbook%20Tables-All%20Years.xls?v=42780",N:1}],
+	["[N=2] ", {url:"https://www.ers.usda.gov/webdocs/DataFiles/Feed_Grains_Yearbook_Tables__18027/Feed%20Grains%20Yearbook%20Tables-All%20Years.xls?v=42780",N:2}],
+	["[N=3] ", {url:"https://www.ers.usda.gov/webdocs/DataFiles/Feed_Grains_Yearbook_Tables__18027/Feed%20Grains%20Yearbook%20Tables-All%20Years.xls?v=42780",N:3}],
+	["[N=4] ", {url:"https://www.ers.usda.gov/webdocs/DataFiles/Feed_Grains_Yearbook_Tables__18027/Feed%20Grains%20Yearbook%20Tables-All%20Years.xls?v=42780",N:4}],
+	["[N=5] ", {url:"https://www.ers.usda.gov/webdocs/DataFiles/Feed_Grains_Yearbook_Tables__18027/Feed%20Grains%20Yearbook%20Tables-All%20Years.xls?v=42780",N:5}],
+	["[N=6] ", {url:"https://www.ers.usda.gov/webdocs/DataFiles/Feed_Grains_Yearbook_Tables__18027/Feed%20Grains%20Yearbook%20Tables-All%20Years.xls?v=42780",N:6}],
+	["[N=7] ", {url:"https://www.ers.usda.gov/webdocs/DataFiles/Feed_Grains_Yearbook_Tables__18027/Feed%20Grains%20Yearbook%20Tables-All%20Years.xls?v=42780",N:7}],
+	["[N=8] ", {url:"https://www.ers.usda.gov/webdocs/DataFiles/Feed_Grains_Yearbook_Tables__18027/Feed%20Grains%20Yearbook%20Tables-All%20Years.xls?v=42780",N:8}]
+];
+var parms = ["N", "t"];
+for(var i = 0; i < URLS.length; ++i) {
+	if(URLS[i].length < 2) { document.getElementById("examples").innerHTML += (URLS[i][0]||"") + "\n"; continue; }
+	var path = '/data?url=' + URLS[i][1].url;
+	for(var j = 0; j < parms.length; ++j) if(URLS[i][1][parms[j]]) path += '&' + parms[j] + '=' + URLS[i][1][parms[j]];
+	document.getElementById("examples").innerHTML += '- ' + URLS[i][0] + ' <a href="' + path + '">' + path + '</a>\n';
+}
+</script>
+<pre>
+<b>This service is powered by <a href="http://sheetjs.com">SheetJS</a></b>
+
+<b>Source Code:</b>
+
+- <a href="https://github.com/SheetJS/sheetaki">Source code for this service</a>
+
+- <a href="https://github.com/SheetJS/js-xlsx">Source code for the js-xlsx spreadsheet library</a>
+</pre>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36810333-1']);
+  _gaq.push(['_setDomainName', 'sheetjs.com']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</body>
+</html>
