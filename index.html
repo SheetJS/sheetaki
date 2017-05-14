@@ -19,20 +19,22 @@ send a request to /data?url=&lt;url&gt;&amp;N=&lt;idx&gt; to convert the spreads
 </pre>
 <pre id="examples"></pre>
 <script>
+var URL1 = "https://obamawhitehouse.archives.gov/sites/default/files/omb/budget/fy2014/assets/receipts.xls";
+var URL2 = "https://www.ers.usda.gov/webdocs/DataFiles/50048/Feed%20Grains%20Yearbook%20Tables-All%20Years.xls?v=42839"
 var URLS = [
-	["[CSV] ", {url:"https://obamawhitehouse.archives.gov/sites/default/files/omb/budget/fy2014/assets/receipts.xls"}],
-	["[JSON]", {url:"https://obamawhitehouse.archives.gov/sites/default/files/omb/budget/fy2014/assets/receipts.xls", t:"json"}],
-	["[HTML]", {url:"https://obamawhitehouse.archives.gov/sites/default/files/omb/budget/fy2014/assets/receipts.xls", t:"html"}],
+	["[CSV] ", {url:URL1}],
+	["[JSON]", {url:URL1, t:"json"}],
+	["[HTML]", {url:URL1, t:"html"}],
 	[],
-	["[LIST]", {url:"https://www.ers.usda.gov/webdocs/DataFiles/Feed_Grains_Yearbook_Tables__18027/Feed%20Grains%20Yearbook%20Tables-All%20Years.xls?v=42780",N:-1}],
-	["[N=1] ", {url:"https://www.ers.usda.gov/webdocs/DataFiles/Feed_Grains_Yearbook_Tables__18027/Feed%20Grains%20Yearbook%20Tables-All%20Years.xls?v=42780",N:1}],
-	["[N=2] ", {url:"https://www.ers.usda.gov/webdocs/DataFiles/Feed_Grains_Yearbook_Tables__18027/Feed%20Grains%20Yearbook%20Tables-All%20Years.xls?v=42780",N:2}],
-	["[N=3] ", {url:"https://www.ers.usda.gov/webdocs/DataFiles/Feed_Grains_Yearbook_Tables__18027/Feed%20Grains%20Yearbook%20Tables-All%20Years.xls?v=42780",N:3}],
-	["[N=4] ", {url:"https://www.ers.usda.gov/webdocs/DataFiles/Feed_Grains_Yearbook_Tables__18027/Feed%20Grains%20Yearbook%20Tables-All%20Years.xls?v=42780",N:4}],
-	["[N=5] ", {url:"https://www.ers.usda.gov/webdocs/DataFiles/Feed_Grains_Yearbook_Tables__18027/Feed%20Grains%20Yearbook%20Tables-All%20Years.xls?v=42780",N:5}],
-	["[N=6] ", {url:"https://www.ers.usda.gov/webdocs/DataFiles/Feed_Grains_Yearbook_Tables__18027/Feed%20Grains%20Yearbook%20Tables-All%20Years.xls?v=42780",N:6}],
-	["[N=7] ", {url:"https://www.ers.usda.gov/webdocs/DataFiles/Feed_Grains_Yearbook_Tables__18027/Feed%20Grains%20Yearbook%20Tables-All%20Years.xls?v=42780",N:7}],
-	["[N=8] ", {url:"https://www.ers.usda.gov/webdocs/DataFiles/Feed_Grains_Yearbook_Tables__18027/Feed%20Grains%20Yearbook%20Tables-All%20Years.xls?v=42780",N:8}]
+	["[LIST]", {url:URL2,N:-1}],
+	["[N=1] ", {url:URL2,N:1}],
+	["[N=2] ", {url:URL2,N:2}],
+	["[N=3] ", {url:URL2,N:3}],
+	["[N=4] ", {url:URL2,N:4}],
+	["[N=5] ", {url:URL2,N:5}],
+	["[N=6] ", {url:URL2,N:6}],
+	["[N=7] ", {url:URL2,N:7}],
+	["[N=8] ", {url:URL2,N:8}]
 ];
 var parms = ["N", "t"];
 for(var i = 0; i < URLS.length; ++i) {
