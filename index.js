@@ -1,8 +1,10 @@
 var XLSX = require('xlsx');
 var URL = require('url');
 var request = require('request');
-var send = require('send');
 var micro = require('micro');
+
+var fs = require("fs");
+var HTML = fs.readFileSync("index.html");
 
 function do_url(req, url, res) {
 	request(url.query.url, {encoding:null}, function(err, response, body) {
@@ -29,18 +31,21 @@ function do_url(req, url, res) {
 		}
 	});
 }
-send.mime.default_type="text/html";
+
 module.exports = function(req, res) {
 	var url = URL.parse(req.url, true);
 	if(url.pathname == "/") {
-		res.setHeader('Content-Type', 'text/html; charset=UTF-8');
-		return send(req, "index.html").pipe(res);
+		res.writeHead(200, {
+			'Content-Type': 'text/html; charset=UTF-8'
+		});
+		res.end(HTML);
+		return;
 	}
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	var mode = -1;
 	if(url.query.url) mode = 0;
-	if(mode == -1) return micro.send(res, 500, "Must issue command");
+	if(mode == -1) { micro.send(res, 500, "Must issue command"); return; }
 	switch(mode) {
-		case 0: return do_url(req, url, res);
+		case 0: do_url(req, url, res); break;
 	}
 };

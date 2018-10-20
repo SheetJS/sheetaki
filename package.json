@@ -7,7 +7,6 @@
 	"dependencies": {
 		"micro":"",
 		"request":"",
-		"send":"",
 		"xlsx":""
 	},
 	"scripts": {
