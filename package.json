@@ -10,9 +10,8 @@
 		"xlsx":""
 	},
 	"scripts": {
-		"start": "micro"
+		"build": "echo hai"
 	},
 	"homepage": "https://sheetaki.now.sh",
-	"license": "Apache-2.0",
-	"engines": { "node": ">=6" }
+	"license": "Apache-2.0"
 }

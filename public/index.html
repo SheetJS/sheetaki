@@ -8,7 +8,7 @@
 <pre>
 <b><a href="http://sheetjs.com">SheetJS</a> Spreadsheet Conversion Service</b>
 
-send a request to /data?url=&lt;url&gt;&amp;N=&lt;idx&gt; to convert the spreadsheet at `url` to a simpler format
+send a request to /api/data?url=&lt;url&gt;&amp;N=&lt;idx&gt; to convert the spreadsheet at `url` to a simpler format
 
 <b>parameters:</b>
 - url=&lt;url&gt;      the url to request
@@ -39,7 +39,7 @@ var URLS = [
 var parms = ["N", "t"];
 for(var i = 0; i < URLS.length; ++i) {
 	if(URLS[i].length < 2) { document.getElementById("examples").innerHTML += (URLS[i][0]||"") + "\n"; continue; }
-	var path = '/data?url=' + URLS[i][1].url;
+	var path = '/api/data?url=' + URLS[i][1].url;
 	for(var j = 0; j < parms.length; ++j) if(URLS[i][1][parms[j]]) path += '&' + parms[j] + '=' + URLS[i][1][parms[j]];
 	document.getElementById("examples").innerHTML += '- ' + URLS[i][0] + ' <a href="' + path + '">' + path + '</a>\n';
 }
@@ -51,7 +51,7 @@ for(var i = 0; i < URLS.length; ++i) {
 
 - <a href="https://github.com/SheetJS/sheetaki">Source code for this service</a>
 
-- <a href="https://github.com/SheetJS/js-xlsx">Source code for the js-xlsx spreadsheet library</a>
+- <a href="https://github.com/SheetJS/sheetjs">Source code for the SheetJS spreadsheet library</a>
 </pre>
 <script type="text/javascript">
   var _gaq = _gaq || [];
