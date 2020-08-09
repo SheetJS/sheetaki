@@ -8,7 +8,7 @@
 <pre>
 <b><a href="http://sheetjs.com">SheetJS</a> Spreadsheet Conversion Service</b>
 
-send a request to /api/data?url=&lt;url&gt;&amp;N=&lt;idx&gt; to convert the spreadsheet at `url` to a simpler format
+<b>Proxy:</b> send a request to /api/data to convert the spreadsheet at `url` to a simpler format
 
 <b>parameters:</b>
 - url=&lt;url&gt;      the url to request
@@ -28,12 +28,12 @@ var URLS = [
 	[],
 	["[LIST]", {url:URL2,N:-1}],
 	["[N=1] ", {url:URL2,N:1}],
-	["[N=2] ", {url:URL2,N:2}],
-	["[N=3] ", {url:URL2,N:3}],
+//	["[N=2] ", {url:URL2,N:2}],
+//	["[N=3] ", {url:URL2,N:3}],
 	["[N=4] ", {url:URL2,N:4}],
-	["[N=5] ", {url:URL2,N:5}],
-	["[N=6] ", {url:URL2,N:6}],
-	["[N=7] ", {url:URL2,N:7}],
+//	["[N=5] ", {url:URL2,N:5}],
+//	["[N=6] ", {url:URL2,N:6}],
+//	["[N=7] ", {url:URL2,N:7}],
 	["[N=8] ", {url:URL2,N:8}]
 ];
 var parms = ["N", "t"];
@@ -45,6 +45,28 @@ for(var i = 0; i < URLS.length; ++i) {
 }
 </script>
 <pre>
+
+<b>Upload:</b> upload a file to /api/upload to convert the spreadsheet at `url` to a simpler format
+
+<b>parameters:</b>
+- N=&lt;idx&gt;        the sheet index to use (-1 returns a list of sheet names in the workbook)
+- t=&lt;type&gt;       export type: "json" for json, "html" for html, default is CSV
+
+<b>example:</b>
+<form method="POST" action="api/upload" enctype="multipart/form-data"><input type="hidden" name="N" value="0">
+<label for="file">Upload a file</label>
+<input type="file" name="file" id="file">
+
+<label for="t">Export type</label>
+<select name="t" id="t">
+	<option value="csv" selected>CSV</option>
+	<option value="json">Array of arrays</option>
+	<option value="html">HTML TABLE</option>
+</select>
+
+<input type="submit" value="Click here to upload!">
+</form>
+
 <b>This service is powered by <a href="http://sheetjs.com">SheetJS</a></b>
 
 <b>Source Code:</b>

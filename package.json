@@ -5,7 +5,7 @@
 	"description": "Spreadsheet CSV conversion microservice",
 	"keywords": ["csv", "spreadsheet", "data", "conversion", "excel"],
 	"dependencies": {
-		"micro":"",
+		"formidable-serverless":"",
 		"request":"",
 		"xlsx":""
 	},
