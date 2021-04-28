@@ -10,16 +10,16 @@ module.exports = function (req, res) {
     /* parse form data */
     const form = formidable({ multiples: true, maxFileSize: 2 * 1024 * 1024 });
 
+    /*create temp file*/
     const newFile = () => {
-        const tmpobj = tmp.fileSync();
-        console.log('File: ', tmpobj.name);
-        console.log('Filedescriptor: ', tmpobj.fd);
+        const tmpobj = tmp.fileSync({postfix: '.xlsx'});
         return tmpobj.name;
     }
+    
     const writeFile = (fileName, file) => {
-        // console.log(file);
-        fs.writeFileSync(fileName + '.xlsx', file, (err) => {
+        fs.writeFile(fileName, file, (err) => {
             if (err) return res.status(500).send(err.message || err);
+            res.status(201).send(fileName);
         });
     }
     form.parse(req, (err, fields, files) => {
