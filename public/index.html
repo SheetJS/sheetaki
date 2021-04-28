@@ -66,6 +66,11 @@ for(var i = 0; i < URLS.length; ++i) {
 
 <input type="submit" value="Click here to upload!">
 </form>
+<form method="POST" action="api/save" enctype="multipart/form-data"><input type="hidden" name="N" value="0">
+<label for="file">Upload a file</label>
+<input type="file" name="file" id="file">
+<input type="submit" value="Click here to save!">
+</form>
 
 <b>This service is powered by <a href="http://sheetjs.com">SheetJS</a></b>
 

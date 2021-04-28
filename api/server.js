@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const data = require('./data/index');
 const upload = require('./upload/index');
+const save = require('./save/index');
 const bodyParser = require('body-parser');
 const port = 3000;
 
@@ -12,6 +13,7 @@ app.use(express.static('public'));
 
 app.use('/api/data', data);
 app.use('/api/upload', upload);
+app.use('/api/save', save);
 
 app.listen(port, () => {
     console.log(`Listening on port: ${port}`);
