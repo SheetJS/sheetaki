@@ -2,10 +2,12 @@ const URL = require('url'), fs = require('fs');
 const do_wb = require('../../src/util');
 const formidable = require('formidable-serverless');
 const tmp = require('tmp');
+const AWS = require('aws-sdk');
 
 module.exports = function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     const url = URL.parse(req.url, true);
+    const s3 = new AWS.S3({ endpoint: 'http://localhost:4566', s3ForcePathStyle: true });
 
     /* parse form data */
     const form = formidable({ multiples: true, maxFileSize: 2 * 1024 * 1024 });
@@ -16,12 +18,28 @@ module.exports = function (req, res) {
         return tmpobj.name;
     }
     
-    const writeFile = (fileName, file) => {
-        fs.writeFile(fileName, file, (err) => {
+    // const writeFile = (filename, file) => {    
+    //     fs.writeFile(filename, file, (err) => {
+    //         if (err) return res.status(500).send(err.message || err);
+    //         res.status(201).send(filename);
+    //     });
+    // }
+    
+    //upload file to s3 bucket
+    const uploadFile = (filename, file) =>   {
+        filename = filename.split("/");
+        filename = filename[filename.length-1]
+        const params = {
+            Bucket: "localstacktest",
+            Key: filename,
+            Body: file
+        };
+        s3.putObject(params, function (err, data) {
             if (err) return res.status(500).send(err.message || err);
-            res.status(201).send(fileName);
+            res.status(201).send(filename);
         });
-    }
+    };
+    //
     form.parse(req, (err, fields, files) => {
         if (err) return res.status(400).send(err.message || err);
         if (!url.query) url.query = fields;
@@ -38,7 +56,8 @@ module.exports = function (req, res) {
         fs.readFile(file.path, (err, body) => {
             if (err) return res.status(500).send(err.message || err);
             const tmpFile = newFile();
-            writeFile(tmpFile, body);
+            uploadFile(tmpFile, body);
+            //writeFile(tmpFile, body);
         });
     });
 };
