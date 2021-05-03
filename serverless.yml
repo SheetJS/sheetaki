@@ -1,0 +1,28 @@
+service: localstack-lambda
+# plugins:
+#   - serverless-localstack
+
+# custom:
+#   localstack:
+#     debug: true
+#     stages:
+#      - local
+#      - dev
+#     host: http://localhost  # optional - LocalStack host to connect to
+#     edgePort: 4566  # optional - LocalStack edge port to connect to
+#     endpointFile: localstack_endpoints.json
+    
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: us-east-1
+  memorySize: 128
+functions:
+  app:
+    handler: api/server.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'

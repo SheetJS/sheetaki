@@ -1,3 +1,4 @@
+const serverless = require('serverless-http');
 const express = require('express');
 const app = express();
 const data = require('./data/index');
@@ -17,6 +18,7 @@ app.use('/api/upload', upload);
 app.use('/api/save', save);
 app.use('/api/file', file);
 
-app.listen(port, () => {
-    console.log(`Listening on port: ${port}`);
-});
+// app.listen(port, () => {
+//     console.log(`Listening on port: ${port}`);
+// });
+module.exports.handler = serverless(app);

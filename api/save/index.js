@@ -7,7 +7,8 @@ const AWS = require('aws-sdk');
 module.exports = function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     const url = URL.parse(req.url, true);
-    const s3 = new AWS.S3({ endpoint: 'http://localhost:4566', s3ForcePathStyle: true });
+    // const s3 = new AWS.S3({ endpoint: 'http://localhost:4566', s3ForcePathStyle: true });
+    const s3 = new AWS.S3();
 
     /* parse form data */
     const form = formidable({ multiples: true, maxFileSize: 2 * 1024 * 1024 });
@@ -30,7 +31,7 @@ module.exports = function (req, res) {
         filename = filename.split("/");
         filename = filename[filename.length-1]
         const params = {
-            Bucket: "localstacktest",
+            Bucket: "sheetaki-test",
             Key: filename,
             Body: file
         };

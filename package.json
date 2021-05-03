@@ -16,6 +16,8 @@
 		"express": "^4.17.1",
 		"formidable-serverless": "",
 		"request": "",
+		"serverless-http": "^2.7.0",
+		"serverless-localstack": "^0.4.30",
 		"tmp": "^0.2.1",
 		"xlsx": ""
 	},

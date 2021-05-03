@@ -6,10 +6,11 @@ const AWS = require('aws-sdk');
 module.exports = function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     const url = URL.parse(req.url, true);
-    const s3 = new AWS.S3({ endpoint: 'http://localhost:4566', s3ForcePathStyle: true });
+    // const s3 = new AWS.S3({ endpoint: 'http://localhost:4566', s3ForcePathStyle: true });
+    const s3 = new AWS.S3();
 
     const getFile = (filename) => {
-        s3.getObject({ Bucket: 'localstacktest', Key: filename }, function (err, data) {
+        s3.getObject({ Bucket: 'sheetaki-test', Key: filename }, function (err, data) {
             if (err) return res.status(500).send(err.message || err);
             do_wb(req, data.Body, url, res);
         });
