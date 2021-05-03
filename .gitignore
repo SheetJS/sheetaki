@@ -1,5 +1,7 @@
 .now
 node_modules
+.env
+.serverless
 
 # Environment Variables
 .env

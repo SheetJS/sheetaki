@@ -9,7 +9,7 @@
       "runtime": "nodejs12.x",
       "stage": "dev",
       "region": "us-east-1",
-      "memorySize": 128,
+      "memorySize": 512,
       "variableSyntax": "\\${([^{}:]+?(?:\\(|:)(?:[^:{}][^{}]*?)?)}",
       "versionFunctions": true,
       "compiledCloudFormationTemplate": {
@@ -175,12 +175,12 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/localstack-lambda/dev/1620056787473-2021-05-03T15:46:27.473Z/localstack-lambda.zip"
+                "S3Key": "serverless/localstack-lambda/dev/1620092918879-2021-05-04T01:48:38.879Z/localstack-lambda.zip"
               },
               "Handler": "api/server.handler",
               "Runtime": "nodejs12.x",
               "FunctionName": "localstack-lambda-dev-app",
-              "MemorySize": 128,
+              "MemorySize": 512,
               "Timeout": 6,
               "Role": {
                 "Fn::GetAtt": [
@@ -193,14 +193,14 @@
               "AppLogGroup"
             ]
           },
-          "AppLambdaVersionpKt6OvdECa0w3L8STXgnFAZzVQXb1lv1UQDQyHZmwu8": {
+          "AppLambdaVersionuvewJZYompWGhR7PreRGORUZWWNhF3zGn5TtfgsWIs": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AppLambdaFunction"
               },
-              "CodeSha256": "ti9O4pTltT2kEw78OJXfrJVusyoy/3C+KWaYQByAA20="
+              "CodeSha256": "3b8ZgXd14AZAi3l2N89aVQ4LE9Ty39V8tHZhL6Q1t3w="
             }
           },
           "ApiGatewayRestApi": {
@@ -319,7 +319,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1620056783201": {
+          "ApiGatewayDeployment1620092914902": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -382,7 +382,7 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersionpKt6OvdECa0w3L8STXgnFAZzVQXb1lv1UQDQyHZmwu8"
+              "Ref": "AppLambdaVersionuvewJZYompWGhR7PreRGORUZWWNhF3zGn5TtfgsWIs"
             },
             "Export": {
               "Name": "sls-localstack-lambda-dev-AppLambdaFunctionQualifiedArn"
@@ -514,11 +514,11 @@
         ],
         "name": "localstack-lambda-dev-app",
         "package": {},
-        "memory": 128,
+        "memory": 512,
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "AppLambdaVersionpKt6OvdECa0w3L8STXgnFAZzVQXb1lv1UQDQyHZmwu8"
+        "versionLogicalId": "AppLambdaVersionuvewJZYompWGhR7PreRGORUZWWNhF3zGn5TtfgsWIs"
       }
     },
     "configValidationMode": "warn",
@@ -540,7 +540,7 @@
     "artifact": "/Users/duncanphelps/Documents/Learning/Javascript/sheetaki/sheetaki/.serverless/localstack-lambda.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/localstack-lambda/dev/1620056787473-2021-05-03T15:46:27.473Z",
+    "artifactDirectoryName": "serverless/localstack-lambda/dev/1620092918879-2021-05-04T01:48:38.879Z",
     "artifact": "localstack-lambda.zip"
   }
 }

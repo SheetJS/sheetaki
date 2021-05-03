@@ -3,6 +3,7 @@ const do_wb = require('../../src/util');
 const formidable = require('formidable-serverless');
 const tmp = require('tmp');
 const AWS = require('aws-sdk');
+const { uploadFile } = require('../s3');
 
 module.exports = function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -19,28 +20,6 @@ module.exports = function (req, res) {
         return tmpobj.name;
     }
     
-    // const writeFile = (filename, file) => {    
-    //     fs.writeFile(filename, file, (err) => {
-    //         if (err) return res.status(500).send(err.message || err);
-    //         res.status(201).send(filename);
-    //     });
-    // }
-    
-    //upload file to s3 bucket
-    const uploadFile = (filename, file) =>   {
-        filename = filename.split("/");
-        filename = filename[filename.length-1]
-        const params = {
-            Bucket: "sheetaki-test",
-            Key: filename,
-            Body: file
-        };
-        s3.putObject(params, function (err, data) {
-            if (err) return res.status(500).send(err.message || err);
-            res.status(201).send(filename);
-        });
-    };
-    //
     form.parse(req, (err, fields, files) => {
         if (err) return res.status(400).send(err.message || err);
         if (!url.query) url.query = fields;
@@ -54,11 +33,12 @@ module.exports = function (req, res) {
         /* read file */
         const file = fentries[0][1]; 
        
-        fs.readFile(file.path, (err, body) => {
+        fs.readFile(file.path, async (err, body) => {
             if (err) return res.status(500).send(err.message || err);
             const tmpFile = newFile();
-            uploadFile(tmpFile, body);
-            //writeFile(tmpFile, body);
+            const result = await uploadFile(tmpFile, body);
+            console.log(result);
+            res.send(result.key);
         });
     });
 };

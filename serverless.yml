@@ -19,7 +19,7 @@ provider:
   runtime: nodejs12.x
   stage: dev
   region: us-east-1
-  memorySize: 128
+  memorySize: 512
 functions:
   app:
     handler: api/server.handler
