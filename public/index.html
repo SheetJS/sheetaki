@@ -1,97 +1,117 @@
-<html>
-<head>
-<title>SheetJS Spreadsheet Conversion Service</title>
-<link rel="icon" type="image/png" href="//sheetjs.com/logo.png"/>
-</head>
-<body>
-<style> a { text-decoration: none } </style>
-<pre>
-<b><a href="http://sheetjs.com">SheetJS</a> Spreadsheet Conversion Service</b>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="client.js"></script> -->
+    <title>SheetJS Spreadsheet Conversion Service</title>
+    <link rel="icon" type="image/png" href="//sheetjs.com/logo.png" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <style>
+      a {
+        text-decoration: none;
+      }
+    </style>
+    <div id="root">
+      <!-- <div class="headerBar">
+        <img src="assets/logo.png" class="logo" alt="logo" />
+        <h2 class="title">SheetJS Spreadsheet Conversion Service</h2>
+      </div>
+      <div class="container">
+        <div class="bar">
+          <div id="proxy" class="barSection" style="border-right: solid #B5B5B5 1px;">
+            <h2>Proxy</h2>
+          </div>
+    
+          
+          <div id="upload" class="barSection">
+            <h2>Upload</h2>
+          </div>
+          
+          <div id="save" class="barSection" style="border-left: solid #B5B5B5 1px;">
+            <h2>Save</h2>
+          </div>
+        </div>
+        <div class="demo">
+          <div class="demoContent proxy">
+            <h2>Proxy</h2>
+            <p>
+                
+            </p>
+            <div class="testButtons">
+                <p>
+                    Send a request to /api/data to convert the spreadsheet at
+                    `url` to a simpler format
+                </p>
+                <b>Parameters:</b>
+                    <p>
+                        - url=&lt;url&gt; the url to request 
+                    </p>
+                    <p>
+                        - N=&lt;idx&gt; the sheet index to use (-1 returns a list of sheet names in the workbook) 
+                    </p>
+                    <p>
+                        - t=&lt;type&gt; export type: "json" for json, "html" for html, default is CSV
+                    </p>
+                <br/>
 
-<b>Proxy:</b> send a request to /api/data to convert the spreadsheet at `url` to a simpler format
+                <b>Examples:</b>
+            </div>
+          </div>
+          <div class="demoContent upload">
+              <h2>
+                Read a file
+            </h2>
+            <p>
+                using /api/upload
+            </p>
+            <form method="POST" action="api/upload" enctype="multipart/form-data">
+                <input type="hidden" name="N" value="0" />
+                <label class="button1" for="file">
+                    <input
+                        name="file"
+                        type="file"
+                        onChange={handleFileSelect}
+                    />
+                    Choose file
+                </label>
+                <label for="t">Export type</label>
+                <select name="t" id="t">
+                    <option value="csv" selected>CSV</option>
+                    <option value="json">Array of arrays</option>
+                    <option value="html">HTML TABLE</option>
+                </select>
 
-<b>parameters:</b>
-- url=&lt;url&gt;      the url to request
-- N=&lt;idx&gt;        the sheet index to use (-1 returns a list of sheet names in the workbook)
-- t=&lt;type&gt;       export type: "json" for json, "html" for html, default is CSV
+                <input class="button1" type="submit" value="Click here to upload!" />
+            </form>
+          </div>
+          <div class="demoContent save">
+              Save
+          </div>
+        </div>
+      </div> -->
+    </div>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(["_setAccount", "UA-36810333-1"]);
+      _gaq.push(["_setDomainName", "sheetjs.com"]);
+      _gaq.push(["_setAllowLinker", true]);
+      _gaq.push(["_trackPageview"]);
 
-<b>examples:</b>
-</pre>
-<pre id="examples"></pre>
-<script>
-var URL1 = "https://obamawhitehouse.archives.gov/sites/default/files/omb/budget/fy2014/assets/receipts.xls";
-var URL2 = "https://www.ers.usda.gov/webdocs/DataFiles/50048/Feed%20Grains%20Yearbook%20Tables-All%20Years.xls?v=42839"
-var URLS = [
-	["[CSV] ", {url:URL1}],
-	["[JSON]", {url:URL1, t:"json"}],
-	["[HTML]", {url:URL1, t:"html"}],
-	[],
-	["[LIST]", {url:URL2,N:-1}],
-	["[N=1] ", {url:URL2,N:1}],
-//	["[N=2] ", {url:URL2,N:2}],
-//	["[N=3] ", {url:URL2,N:3}],
-	["[N=4] ", {url:URL2,N:4}],
-//	["[N=5] ", {url:URL2,N:5}],
-//	["[N=6] ", {url:URL2,N:6}],
-//	["[N=7] ", {url:URL2,N:7}],
-	["[N=8] ", {url:URL2,N:8}]
-];
-var parms = ["N", "t"];
-for(var i = 0; i < URLS.length; ++i) {
-	if(URLS[i].length < 2) { document.getElementById("examples").innerHTML += (URLS[i][0]||"") + "\n"; continue; }
-	var path = '/api/data?url=' + URLS[i][1].url;
-	for(var j = 0; j < parms.length; ++j) if(URLS[i][1][parms[j]]) path += '&' + parms[j] + '=' + URLS[i][1][parms[j]];
-	document.getElementById("examples").innerHTML += '- ' + URLS[i][0] + ' <a href="' + path + '">' + path + '</a>\n';
-}
-</script>
-<pre>
-
-<b>Upload:</b> upload a file to /api/upload to convert the spreadsheet at `url` to a simpler format
-
-<b>parameters:</b>
-- N=&lt;idx&gt;        the sheet index to use (-1 returns a list of sheet names in the workbook)
-- t=&lt;type&gt;       export type: "json" for json, "html" for html, default is CSV
-
-<b>example:</b>
-<form method="POST" action="api/upload" enctype="multipart/form-data"><input type="hidden" name="N" value="0">
-<label for="file">Upload a file</label>
-<input type="file" name="file" id="file">
-
-<label for="t">Export type</label>
-<select name="t" id="t">
-	<option value="csv" selected>CSV</option>
-	<option value="json">Array of arrays</option>
-	<option value="html">HTML TABLE</option>
-</select>
-
-<input type="submit" value="Click here to upload!">
-</form>
-<form method="POST" action="api/save" enctype="multipart/form-data"><input type="hidden" name="N" value="0">
-<label for="file">Upload a file</label>
-<input type="file" name="file" id="file">
-<input type="submit" value="Click here to save!">
-</form>
-
-<b>This service is powered by <a href="http://sheetjs.com">SheetJS</a></b>
-
-<b>Source Code:</b>
-
-- <a href="https://github.com/SheetJS/sheetaki">Source code for this service</a>
-
-- <a href="https://github.com/SheetJS/sheetjs">Source code for the SheetJS spreadsheet library</a>
-</pre>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-36810333-1']);
-  _gaq.push(['_setDomainName', 'sheetjs.com']);
-  _gaq.push(['_setAllowLinker', true]);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
-</body>
+      (function () {
+        var ga = document.createElement("script");
+        ga.type = "text/javascript";
+        ga.async = true;
+        ga.src =
+          ("https:" == document.location.protocol
+            ? "https://ssl"
+            : "http://www") + ".google-analytics.com/ga.js";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
 </html>

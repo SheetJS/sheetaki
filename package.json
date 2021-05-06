@@ -1,27 +1,49 @@
 {
-	"name": "sheetaki",
-	"version": "0.0.1",
-	"author": "sheetjs",
-	"description": "Spreadsheet CSV conversion microservice",
-	"keywords": [
-		"csv",
-		"spreadsheet",
-		"data",
-		"conversion",
-		"excel"
-	],
-	"dependencies": {
-		"body-parser": "^1.19.0",
-		"express": "^4.17.1",
-		"formidable-serverless": "",
-		"request": "",
-		"tmp": "^0.2.1",
-		"xlsx": ""
-	},
-	"scripts": {
-		"build": "echo hai",
-		"start": "node api/server.js"
-	},
-	"homepage": "https://sheetaki.now.sh",
-	"license": "Apache-2.0"
+  "name": "sheetaki",
+  "version": "0.0.1",
+  "author": "sheetjs",
+  "description": "Spreadsheet CSV conversion microservice",
+  "keywords": [
+    "csv",
+    "spreadsheet",
+    "data",
+    "conversion",
+    "excel"
+  ],
+  "proxy": "http://localhost:5000/",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "formidable-serverless": "",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "request": "",
+    "tmp": "^0.2.1",
+    "xlsx": ""
+  },
+  "scripts": {
+    "build": "react-scripts build",
+    "start": "node api/server.js",
+    "client": "react-scripts start",
+    "server": "nodemon --watch server api/server.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "homepage": "https://sheetaki.now.sh",
+  "license": "Apache-2.0",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

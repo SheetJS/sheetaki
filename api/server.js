@@ -5,7 +5,7 @@ const upload = require('./upload/index');
 const save = require('./save/index');
 const file = require('./file/index');
 const bodyParser = require('body-parser');
-const port = 3000;
+const port = 5000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

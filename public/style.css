@@ -1,0 +1,112 @@
+body {
+  background-color: #E5E5E5;
+  font-family: Roboto,  Helvetica, Arial, FreeSans, sans-serif;
+  color: #454545;
+  font-size: 14px;
+  /* margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; */
+  
+}
+
+.App {
+  text-align: center;
+}
+
+.headerBar{
+  width: 800px;
+  height: 100px;
+  margin: auto;
+  margin-top: 30px;
+  background-color: #FFFFFF;
+  border: solid #B5B5B5 1px;
+  justify-content: center;
+  position: relative;
+}
+
+.title{
+  padding-top: 15px;
+  position: absolute;
+  left: 200px;
+}
+
+.logo{
+  float:left;
+  width: 60px;
+  padding-left: 20px;
+  padding-top: 20px;
+  padding-right: 0px;
+  /* position: absolute; */
+}
+.container{
+  text-align: center;
+  margin: auto;
+  width: 85%;
+  background-color: #FFFFFF;
+  margin-top: 30px;
+  /* display: flex; */
+  border: solid #B5B5B5 1px;
+}
+
+.bar{
+  display: flex;
+}
+
+.exampleForms{
+  display: flex;
+}
+
+.formContainer{
+  width: 50%;
+  display: block;
+  padding-top: 20px;
+  /* background-color: #454545; */
+  /* border: solid #000; */
+  border-width: 1px;
+}
+
+.barSection{
+  margin: auto;
+  padding: 10px;
+  width: 33%;
+  cursor:pointer;
+  border-bottom: solid #B5B5B5 1px;
+}
+
+input[type="file"]{
+  display: table-cell;
+  position: absolute;
+  /* left: 0; */
+  opacity: 0;
+  /* top: 0; */
+  /* bottom: 0; */
+  width: 40px;
+  height: 30px;
+}
+.button1{
+  cursor: pointer;
+  display: inline-block;
+  padding:0.35em 1.2em;
+  border:0.1em solid #E18874;
+  margin:0 0.3em 0.3em 0;
+  border-radius:0.12em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-weight:300;
+  color:#454545;
+  background-color: Transparent;
+  text-align:center;
+  transition: all 0.2s;
+}
+.button1:hover{
+  color:#FFFFFF;
+  background-color:#E18874;
+}
+
+.clicked {
+  background: #77E2B6;
+}
